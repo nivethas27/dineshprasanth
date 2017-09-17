@@ -1,0 +1,45 @@
+#dpCustomIframeMasterContainer{
+	width:100%;
+	background-color: rgba(36, 41, 47, 0.8);
+	z-index:11;
+	position:fixed;
+	display: none;
+}
+#dpIframe{
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:11;
+}
+#dpIframeContent{
+	width:auto;
+	height:auto;
+	min-height:100px;
+	min-width:400px;
+	display: inline-block;	
+	background-color:#fff;
+	z-index:12;
+	position:relative;
+	top:50%;
+	left:50%;
+	vertical-align:center;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	border:#a2d939 4px solid;
+}
+#dpIframeCloseButton{
+	width:20px;
+	height:20px;
+	float:right;
+	margin-right:5px;
+	margin-top:5px;
+	background:url(../assets/iframe-closeicon.png) no-repeat 0px 0px;
+}
+#dpIframeAlienContent{
+	border:1px solid #000;
+	width:auto;
+	height:auto;
+	margin-top:30px;
+}
