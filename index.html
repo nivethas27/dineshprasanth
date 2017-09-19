@@ -42,9 +42,16 @@
 <link rel="shortcut icon" href="common/assets/favicon32.jpg" type="image/vnd.microsoft.icon" />
 <script src="common/js/jquery-1.8.2.min.js" type="text/javascript"></script>
 <script src="common/js/jquery.backgroundpos.min.js" type="text/javascript"></script>
-<!--<script src="common/js/jquery.nicescroll.min.js" type="text/javascript"></script>-->
+<!--<script src="co(mmon/js/jquery.nicescroll.min.js" type="text/javascript"></script>-->
 <script src="common/js/home.js" type="text/javascript" ></script>
 <script type="text/javascript">
+	function loadPageContainerContent(fileName) {
+		$('#dpPageContainer').load(fileName);
+	}
+	$(window).load(function(){
+  	loadPageContainerContent('./dp-portfolio.html');
+ 	});
+
 	function showFixedNavigationControllers(){
 		$("#fixedHome").css("display","block");
 		$("#fixedSideCategorySelectContainer").css("display","block");
@@ -53,10 +60,16 @@
 		$("#fixedHome").css("display","none");
 		$("#fixedSideCategorySelectContainer").css("display","none");
 	}
-	function jumpto(h){
+	function jumpto(h, fileName){
 		var url = location.href;               //Save down the URL without hash.
-		location.href = "#"+h;                 //Go to the target element.
+		if(h == 'home') {
+			loadPageContainerContent('./dp-portfolio.html');
+		} else {
+			loadPageContainerContent(fileName);
+		}
+		location.href = "#"+ h;                 //Go to the target element.
 		history.replaceState(null,null,url);   //Don't like hashes. Changing it back.
+
 		if(h == 'home'){
 			hideFixedNavigationControllers();
 		} else{
@@ -88,253 +101,52 @@
 </script>
 </head>
 <body>
-<div id="bannerInMobile">Compatible only in desktop browser</div>
-<div id="fixedHome" onclick="jumpto('home')"></div>
-<div id="fixedSideCategorySelectContainer">
-<div id="fixedSideCategory1" onclick="jumpto('home')"></div>
-<div id="fixedSideCategory2" onclick="jumpto('projects')"><p>Projects</p></div>
-<div id="fixedSideCategory3" onclick="jumpto('design')"><p>Design</p></div>
-<div id="fixedSideCategory4" onclick="jumpto('achievements')"><p>Timeline</p></div>
-<div id="fixedSideCategory5" onclick="jumpto('webdev')"><p>Web Development</p></div>
-<div id="fixedSideCategory6" onclick="jumpto('publications')"><p>Publications</p></div>
-<div id="fixedSideCategory7" onclick="jumpto('arts')"><p>Arts</p></div>
-</div>
-<div id="dpCustomIframeMasterContainer"><div id="dpIframe"><div id="dpIframeContent"><div id="dpIframeCloseButton"></div><div id="dpIframeAlienContent"></div></div></div></div>
-<div id="dpHeader">
-<div id="dpNameOuterContainer">
-<div id="dpNameInnerContainer"><div id="home" name="home"></div></div>
-<p>Personal Portfolio</p>
-</div>
-<div id="dpHeaderCategoryContainer">
-<div id="dpMailId" class="linkIframeClass">
-<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-writetome.png)"></div>
-<p>Write to me?</p>
-</div>
-<div onclick="logClickEvent('downloadResume',1);window.open('resources/Resume_DineshPrasanth.pdf', '_blank')">
-<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-resume.png)"></div>
-<p>Resume</p>
-</div>
-<div onclick="logClickEvent('downloadPortfolio',1);window.open('resources/Portfolio_DineshPrasanth.pdf', '_blank')">
-<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-aboutme.png)"></div>
-<p>Portfolio PDF</p>
-</div>
-</div>
-</div>
-<div id="dpBodyContainer">
-<div id="dpRow_1">
-<div id="dpPhotograph"></div>
-<div id="dpPersonalDetail">
-<div class="dpPersonalDetailClass" style="margin-top:20px; background-image:url(common/assets/personaldetail-job.jpg)"><p>Software Development Engineer</p></div>
-<div class="dpPersonalDetailClass" style="background-image:url(common/assets/personaldetail-office.jpg)"><p>Amazon Development Center, India</p></div>
-<div class="dpPersonalDetailClass" style="background-image:url(common/assets/personaldetail-place.jpg)"><p>living in Bangalore, India</p></div>
-<div id="dpSocialLink">
-<div onclick="window.open('https://in.linkedin.com/in/dineshprasanth', '_blank')" style="background-image:url(common/assets/sociallink-linkedin.jpg)"></div>
-<div onclick="window.open('https://www.facebook.com/deepeey', '_blank')" style="background-image:url(common/assets/sociallink-facebook.jpg)"></div>
-<div id="dpMailId" class="linkIframeClass" style="background-image:url(common/assets/sociallink-gmail.jpg)"></div>
-</div>
-</div>
-<div id="dpBites">
-<div id="dpBitesCanvas">
-<div id="dpBitesIcon"></div>
-<div id="dpBitesScrollerContainer">
-<div id="dpBitesScrollerPositionIndicator"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="dpCategoryTileContainer" id="dpRow_2">
-<div id="dpProjects" onclick="jumpto('projects');highlightSideCategorySelect(2);"><div><p>Projects</p><p></p></div></div>
-<div id="dpDesign" onclick="jumpto('design');highlightSideCategorySelect(3);"><div><p>Graphic Designs</p><p></p></div></div>
-<div id="dpAchievements" onclick="jumpto('achievements');highlightSideCategorySelect(4);"><div><p>Timeline</p><p></p></div></div>
-</div>
-<div class="dpCategoryTileContainer" id="dpRow_3">
-<div id="dpWebDev" onclick="jumpto('webdev');highlightSideCategorySelect(5);"><div><p>Website Development</p><p></p></div></div>
-<div id="dpPublications" onclick="jumpto('publications');highlightSideCategorySelect(6);"><div><p>Paper Publications</p><p></p></div></div>
-<div id="dpArtWorks" onclick="jumpto('arts');highlightSideCategorySelect(7);"><div><p>Art Room</p><p></p></div></div>
-</div>
-</div>
-<div id="projectsPageContainer">
-<div id="projectsPageInnerContainer"><div name="projects" id="projects"></div>
-<div id="projectsPageDescription">
-<div id="projectPageDescriptionScroll">
-<div id="projectPageDescriptionGeneral" class="projectPageDescriptionChildren">Possessing a strong foundation, both academically and professionally, in Computer Science, this is a list of my major projects since my under graduation at NIT Trichy.</div>
-<div id="projectPageDescriptionAmazon" class="projectPageDescriptionChildren">Worked on various feature development including authentication and purchase flows for platforms including Youview, Sony Bravia, etc. Earned ownership over Sony Bravia, a platform serving more than a million customers. Independently developed IMDB module for a service responding to Amazon Instant Video client applications. Attained proficiency in various client operations such as video streaming, interface development, clickstream analysis, multimedia caching, etc. Currently entrusted to undertake the feasibility research of a cutting edge interface for high performance HTML5 devices.</div>
-<div id="projectPageDescriptionDred" class="projectPageDescriptionChildren">Improved Random Early Detection that uses Error Diffusion technique when computing probability of dropping the packets during network congestion. Diffused RED algorithm is experimented using Network Simulator that resulted in a reduced variance of Average queue size and a better trade-off for Utilization vs Mean queuing delay than actual RED algorithm.</div>
-<div id="projectPageDescriptionResearch" class="projectPageDescriptionChildren">Presented and Published two papers at IEEE International Conferences. Undergraduate thesis is currently under review for publication.<br/><div class="projectsButtonList"><a class="projectsButton" href="#publications"><span class="projectsButtonText">Go to publications</a></div></div>
-<div id="projectPageDescriptionMicrosoft" class="projectPageDescriptionChildren">Worked on Microsoft’s Email Interchange Azure Project, implementing, performance testing and analyzing impacts of Traffic Manager for the service, thus cost saving $34,000 p.a. Conducted a brown bag on my architecture and obtaining team’s buy for next version release.</div>
-<div id="projectPageDescriptionRaytracer" class="projectPageDescriptionChildren">A C++ three-dimensional object renderer that achieves visual realism, requiring an advanced understanding of Optics and Coordinate geometry to construct, was implemented using the widely acknowledged backwards ray tracing algorithm.</div>
-<div id="projectPageDescriptionPragyanCMS" class="projectPageDescriptionChildren">Contributed for a full-featured modular CMS using PHP5 and MySQL that powers NIT-T’s internet and intranet websites. Developed modules, widgets and templates for the project.</div>
-<div id="projectPageDescriptionStock" class="projectPageDescriptionChildren">Contributed for virtual stock market application built using Django, PHP, MySQL for an online event ‘Dalal street’ which features buy, sell, trade and mortgaging shares between players.</div>
-<div id="projectPageDescriptionOthers" class="projectPageDescriptionChildren">Implemented several <b>Language Models and Translators</b> as part of the Natural Language Processing course on Coursera using Python (submissions went through rigorous testing before acceptance)<br/><b>Bayesian Classifier</b> for Salary Prediction of outgoing students based on several parameters<br/>Parallel Simulation of <b>Triple DES encryption</b> algorithm on a 2D Mesh Architecture</div>
+	<div id="bannerInMobile">Compatible only in desktop browser</div>
 
-</div>
-<div id="projectPageDescriptionArrow"></div>
-</div>
-<div id="projectsPageCategoryContainer">
-<div id="projectsPageCategoryInnerContainer">
-<div id="projectAmazon"><p class="projectCategory">Amazon Instant Video</p><p class="projectCategoryDescription">Amazon Development Center</p></div>
-<div id="projectDred"><p class="projectCategory">Diffused RED Algorithm</p><p class="projectCategoryDescription">Under graduation Thesis</p></div>
-<div id="projectResearch"><p class="projectCategory">Academic Publications</p><p class="projectCategoryDescription">Research at NIT Trichy</p></div>
-<div id="projectMicrosoft"><p class="projectCategory">Traffic Manager</p><p class="projectCategoryDescription">Microsoft Development Center</p></div>
-<div id="projectRaytracer"><p class="projectCategory">Ray Tracer</p><p class="projectCategoryDescription">Internship - IIIT Bangalore</p></div>
-<div id="projectPragyanCMS"><p class="projectCategory">Pragyan CMS</p><p class="projectCategoryDescription">Open source - Web team NITT</p></div>
-<div id="projectStock"><p class="projectCategory">Stock Exchange Simulator</p><p class="projectCategoryDescription">Virtual Stock Market Application</p></div>
-<div id="projectOthers"><p class="projectCategory">Other Projects</p><p class="projectCategoryDescription">Engineering Mini Projects</p></div>
-</div>
-</div>
-</div>
-</div>
+	<div id="fixedHome" onclick="jumpto('home')"></div>
+	
+	<div id="fixedSideCategorySelectContainer">
+		<div id="fixedSideCategory1" onclick="jumpto('home')"></div>
+		<div id="fixedSideCategory2" onclick="jumpto('projects','./projects.html')"><p>Projects</p></div>
+		<div id="fixedSideCategory3" onclick="jumpto('design','./graphic-designs.html')"><p>Design</p></div>
+		<div id="fixedSideCategory4" onclick="jumpto('achievements','./timeline.html')"><p>Timeline</p></div>
+		<div id="fixedSideCategory5" onclick="jumpto('webdev','./website-development.html')"><p>Web Development</p></div>
+		<div id="fixedSideCategory6" onclick="jumpto('publications', './paper-publications.html')"><p>Publications</p></div>
+		<div id="fixedSideCategory7" onclick="jumpto('arts','./art-room.html')"><p>Arts</p></div>
+	</div>
+	
+	<div id="dpCustomIframeMasterContainer">
+		<div id="dpIframe">
+			<div id="dpIframeContent">
+				<div id="dpIframeCloseButton"></div>
+				<div id="dpIframeAlienContent"></div>
+			</div>
+		</div>
+	</div>
 
-<div id="designPageContainer">
-<div id="designCanvasContainer"><div id="design" name="design"></div>
-<div id="designPageSun"></div>
-<div id="designPageEarth"></div>
-<div id="designPageMoon"></div>
-<div id="designPageSaturn"></div>
-<div id="designPageNeptune"></div>
-<div id="designPageJupiter"></div>
-<div id="designPageRocket"></div>
-<div id="designPageRocketSmoke"></div>
-<div id="designPageMercury"></div>
-<div id="designPageMars"></div>
-<div id="designPageHeadingBox">
-<div id="designPageHeadingTop"><p id="designPageLogo" class="linkIframeClass" >Logos</p><p id="designPagePoster" class="linkIframeClass">Posters</p><p id="designPageBrochure" class="linkIframeClass">Brochures</p></div>
-<p id="designPageHeadingText">Welcome to my world of Creativity</p>
-<div id="designPageHeadingBottom"><p id="designPageTshirt" class="linkIframeClass">T-shirt</p><p id="designPageGraphicArt" class="linkIframeClass">Graphic Art</p><p id="designPageMiscellaneous" class="linkIframeClass">Miscellaneous</p></div>
-</div>
-</div>
-</div>
+	<div id="dpHeader">
+		<div id="dpNameOuterContainer">
+			<div id="dpNameInnerContainer"><div id="home" name="home"></div></div>
+			<p>Personal Portfolio</p>
+		</div>
+		<div id="dpHeaderCategoryContainer">
+			<div onclick="logClickEvent('downloadPortfolio',1);window.open('resources/Portfolio_DineshPrasanth.pdf', '_blank')">
+				<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-aboutme.png)"></div>
+				<p>Portfolio PDF</p>
+			</div>
+			<div onclick="logClickEvent('downloadResume',1);window.open('resources/Resume_DineshPrasanth.pdf', '_blank')">
+				<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-resume.png)"></div>
+				<p>Resume</p>
+			</div>
+			<div id="dpMailId" class="linkIframeClass">
+				<div class="dpHeaderCategoryIcon" style="background-image:url(common/assets/category-writetome.png)"></div>
+				<p>Write to me?</p>
+			</div>
+		</div>
+	</div>
 
-<div id="achievementsPageContainer">
-<div id="achievementsCanvasContainer">
-<div id="achievements">Visit <span onclick="jumpto('home')">Home</span> to download my Resume/Portfolio.</div>
-<div id="timelineOuterContainer">
-<div id="timelineSliderLeft"></div>
-<div id="timelineSliderRight"></div>
-<div id="timelineContainer">
-<div id="timelineEventContainer">
+	<div id="dpPageContainer"></div>
 
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater4"><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/nextgenui.jpg)"></div><p>Advanced UI POC</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater4"></div><div class="eventDescription eventDescriptionQuater4">Built JavaScript prototype and independently undertook the feasibility research of a cutting edge interface for low performance HTML5 devices. The results were well received and influenced the road map of financial year.</div></div>
-<div class="greenLineTimeline"><span>Jan-Jun (2015)</span></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater1"><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/10k.jpg)"></div><p>10km Run Completion</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><div class="eventDescription eventDescriptionQuater1">Finished two quarter marathon (10km) run on Mangalore roads and Electronic city flyover, Bangalore</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater1"><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/london.jpg)"></div><p>Release at UK office</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater1"></div><div class="eventDescription eventDescriptionQuater1">Represented Bangalore dev team at London office for AIV application release on HTML5 devices. Resolved major UX discrepancies and critical bugs to receive a "Go" for the scheduled launch.</div></div>
-<div class="blueLineTimeline"><span>Jul-Dec (2014)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater1" style="margin-left:50px;"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><p>IMDb Module</p><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/imdb.jpg)"></div><div class="eventDescription eventDescriptionQuater1 eventDescriptionBottom">Independently developed IMDb module for Amazon Instant Video's novel Service-Xsd-Client based application (Java and HTML5 platform)</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater2" style="margin-left:110px;"><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/caching.jpg)"></div><p>Caching improvisation</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater2"></div><div class="eventDescription eventDescriptionQuater2">Investigated for areas of latency improvements for Sony Bravia's AIV service. Avoided redundant downstream calls (page load improved by 36%) and utilized Memcache to cache heavy latency calls (page load improved by 45%)</div></div>
-<div class="orangeLineTimeline"><span>Jan-Jun (2014)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater2"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater2"></div><p>SGP Launch</p><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/sgp.jpg)"></div><div class="eventDescription eventDescriptionQuater2 eventDescriptionBottom">Independently worked and owned the release of Migration code in US region to foster Single Global Platform(SGP). After this, I became one of the prime owner of Sony Bravia device to responsibly address customer impacting high-sev tickets.</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater2"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater2"></div><p>Migration Release</p><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/migration.jpg)"></div><div class="eventDescription eventDescriptionQuater2 eventDescriptionBottom">Delivered features like welcome screen and purchase flows for AIV application in Sony Bravia, a platform having more than a million customer base. Been a part of major 'User Migration' launch from LoveFilm to AIV application in EU region.</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater3"><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/as3.jpg)"></div><p>AS3 AIV project</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater3"></div><div class="eventDescription eventDescriptionQuater3">Worked on various full-feature deliveries including authentication and purchase flows for ActionScript3 platforms of Amazon Instant Video</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater3"><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/amazon.jpg)"></div><p>Joined Amazon</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater3"></div><div class="eventDescription eventDescriptionQuater3">With two full-time offers from Amazon and Microsoft, I chose to join 'Amazon Instant Video' team due to my passion for Client development</div></div>
-<div class="maroonLineTimeline"><span>Jul-Dec (2013)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater3" style="margin-left:80px;"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater3"></div><p>B.Tech Convocation</p><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/convocation.jpg)"></div><div class="eventDescription eventDescriptionQuater3 eventDescriptionBottom">On August 2013, NIT Trichy conferred the degree of 'Bachelor of Technology' in Computer Science and Engineering(CSE) for completion of my Under-graduation with First Class</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater4"><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/thesis.jpg)"></div><p>Final year thesis</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater4"></div><div class="eventDescription eventDescriptionQuater4">As part of my final year thesis under Dr.C.Mala, NIT Trichy, we improved 'Random Early Detection' algorithm(RED) using 'Error Diffusion' technique while computing dropping probability of packets during network congestion</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater4"><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/media.jpg)"></div><p>Media Citations & Radio Interview</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater4"></div><div class="eventDescription eventDescriptionQuater4">Cited by various English dailies like 'The Hindu' and 'Times of India' for my technological initiatives. An exclusive one-one interview on show 'Young Innovators' was aired by 'All India Radio'</div></div>
-<div class="greenLineTimeline"><span>Jan-Jun (2013)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater4"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater4"></div><p>Head, Computer Support</p><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/csg.jpg)"></div><div class="eventDescription eventDescriptionQuater4 eventDescriptionBottom">Chosen to 'head' the Computer Support team of Technical festival and one of the 'Core' member of Central Web Maintenance team, NIT Trichy</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater4"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater4"></div><p>NLP - coursera</p><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/nlp.jpg)"></div><div class="eventDescription eventDescriptionQuater4 eventDescriptionBottom">Implemented several Language Models and Translators using Python as part of the 'Natural Language Processing' course ("98%") from Columbia University on Coursera (submissions went through rigorous testing before acceptance)</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater1"><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/paper.jpg)"></div><p>Web Technology IEEE publication</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater1"></div><div class="eventDescription eventDescriptionQuater1">Proposed a novel backtracking approach for match making algorithm used in 'Service Discovery' that proved to execute in O(N) running time at the cost of precision rate.</div></div>
-<div class="timelineEventTopBox timelineEventBoxQuater1"><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/metro.jpg)"></div><p>Metro UI</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><div class="eventDescription eventDescriptionQuater1">Metro themed light and minimalistic website built for Pragyan 2013 event (www.pragyan.org/13). Site launch amassed a tremendous count of 1.2 million page views, five times bigger than the count of previous year.</div></div>
-<div class="blueLineTimeline"><span>Jul-Dec (2012)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater1"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><p>Art Exhibition</p><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/art.jpg)"></div><div class="eventDescription eventDescriptionQuater1 eventDescriptionBottom">Displayed all my art works in an "Art Exhibition" set-up  for NIT Trichy's cultural festival</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater1"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater1"></div><p>Salary Prediction</p><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/salary.jpg)"></div><div class="eventDescription eventDescriptionQuater1 eventDescriptionBottom">Bayesian Classifier for Salary Prediction of outgoing undergraduate NIT Trichy students based on several parameters</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater2"><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/paper.jpg)"></div><p>Graph Matching IEEE publication</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater2"></div><div class="eventDescription eventDescriptionQuater2">Parallelizable modules of the well-known Heuristic graph matching algorithm (A*) were discovered to optimize the Task Assignment problem. Published at ICCIS-2012 conference, Kuala Lumpur.</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater2"><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/microsoft.jpg)"></div><p>Microsoft Internship</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater2"></div><div class="eventDescription eventDescriptionQuater2">Worked on Microsoft’s Email Interchange Azure Project, implementing 'Traffic Manager', performance testing and analyzing it for the service. Converted into a "full-time SDE" offer from Microsoft.</div></div>
-<div class="orangeLineTimeline"><span>Jan-Jun (2012)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater2"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater2"></div><p>Parallel 3-DES</p><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/3des.jpg)"></div><div class="eventDescription eventDescriptionQuater2 eventDescriptionBottom">Parallel Simulation (using Pthreads) of Triple Data Encryption Standard (3-DES) algorithm on a 2D Mesh Architecture</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater2"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater2"></div><p>Head, Design team</p><div class="timelineEventBanner timelineEventBannerQuater2" style="background-image:url(common/assets/timeline/design.jpg)"></div><div class="eventDescription eventDescriptionQuater2 eventDescriptionBottom">Chosen to 'head' the Design team of Cultural Festival of NIT Trichy (Nittfest’13)</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater3"><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/cms.jpg)"></div><p>CMS development</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater3"></div><div class="eventDescription eventDescriptionQuater3">Contributed to a full-featured modular CMS using PHP5 and MySQL that powers NIT-T’s internet and intranet websites. Developed modules, widgets and templates for the project.</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater3"><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/stock.jpg)"></div><p>Virtual Stock Exchange</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater3"></div><div class="eventDescription eventDescriptionQuater3">Primary developer of virtual stock market application built using Django, PHP, MySQL for an online event ‘Dalal street’ which feature intelligence to buy, sell, trade and mortgage shares between players.</div></div>
-<div class="maroonLineTimeline"><span>(2011)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater3"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater3"></div><p>Ray tracer development</p><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/raytracer.jpg)"></div><div class="eventDescription eventDescriptionQuater3 eventDescriptionBottom">Internship under Dr.Jaya S Nair, International Institute of Information Technology, developed a C++ three-dimensional object renderer, called "Raytracer", that achieves visual realism</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater3"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater3"></div><p>Apple UI</p><div class="timelineEventBanner timelineEventBannerQuater3" style="background-image:url(common/assets/timeline/appleui.jpg)"></div><div class="eventDescription eventDescriptionQuater3 eventDescriptionBottom">Apple themed website built for Pragyan 2012 event as a 'Steve Jobs' tribute (www.pragyan.org/12)</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater4"><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/webdev.jpg)"></div><p>Started web dev and design</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater4" style="margin-top:-22px"></div><div class="eventDescription eventDescriptionQuater4">Started learning various languages to enhance my Web Development skills and Photoshop for design skills</div></div>
-<div class="timelineEventTopBox timelineEventTopHalfBox timelineEventBoxQuater4"><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/csg.jpg)"></div><p>Central web team</p><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater4"></div><div class="eventDescription eventDescriptionQuater4">Became a member of elite club 'Delta', Central Web Maintenance Team of NIT Trichy</div></div>
-<div class="greenLineTimeline"><span>(2010)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater4" style="margin-left:95px;"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater4"></div><p>Cloud computing</p><div class="timelineEventBanner timelineEventBannerQuater4" style="background-image:url(common/assets/timeline/cloud.jpg)"></div><div class="eventDescription eventDescriptionQuater4 eventDescriptionBottom">Award winning paper on "Cloud computing" that studied the personal cloud server setup over institute’s LAN. Presented at renowned institutes such as Anna University, Amrita University and VIT, Vellore.</div></div>
-</div>
-
-<div class="timelineQuaterContainer">
-<div class="timelineEventTopBox timelineEventBoxQuater1" style="margin-left:80px;"><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/nitt.jpg)"></div><p>B.Tech, NIT Trichy</p><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><div class="eventDescription eventDescriptionQuater1">Cracked AIEEE entrance examination and got admit to four year Bachelor degree in Computer Science and Engineering (CSE) at "National Institute of Technology" (NIT Trichy)</div></div>
-<div class="blueLineTimeline"><span>(2009)</span></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater1"><div class="timelineEventArrow timelineEventFullArrow timelineEventArrowQuater1"></div><p>AIEEE scholarship</p><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/aieee.jpg)"></div><div class="eventDescription eventDescriptionQuater1 eventDescriptionBottom">Received AIEEE (All India Engineering Entrance Examination) scholarship (2009) for securing a rank among top 1% where more than 800,000 students compete</div></div>
-<div class="timelineEventBottomBox timelineEventBoxQuater1"><div class="timelineEventArrow timelineEventHalfArrow timelineEventArrowQuater1"></div><p>Secondary education</p><div class="timelineEventBanner timelineEventBannerQuater1" style="background-image:url(common/assets/timeline/exam.jpg)"></div><div class="eventDescription eventDescriptionQuater1 eventDescriptionBottom">Completed secondary education under Central Board of Secondary Education(CBSE) with "88%" aggregate and "95%" in Mathematics</div></div>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div id="webdevPageContainer">
-<div id="webdev" name="webdev"></div>
-<div id="webdevCanvasContainer">
-<div id="webdevContentContainer">
-<div id="webdevMetroContainer" onclick="window.open('http://www.pragyan.org/13', '_blank')"><div class="webdevTileText"><p style="font-size:22px;">Metro Theme</p><p style="font-size:18px;">www.pragyan.org/13<p/></div></div>
-<div id="webdevAppleContainer" onclick="window.open('http://www.pragyan.org/12', '_blank')"><div class="webdevTileText"><p style="font-size:22px;">Apple Theme</p><p style="font-size:18px;">www.pragyan.org/12<p/></div></div>
-<div id="webdevSereneContainer"><div class="webdevTileText"><p style="font-size:22px;">Freelance Development</p><p style="font-size:18px;">Serene Woods Corporation<p/></div></div>
-<div id="webdevStockContainer"><div class="webdevTileText"><p style="font-size:22px;">Dalal Street Application</p><p style="font-size:18px;">Virtual Stock Exchange Simulator <p/></div></div>
-</div>
-</div>
-</div>
-
-<div id="publicationPageContainer">
-<div id="publications" name="publications"></div>
-<div id="publicationCanvasContainer">
-<div id="publicationBox1" class="publicationBox"><div id="publicationImage1" class="publicationImage"></div><div id="publicationContent1" class="publicationContent"><p class="publicationContentTitle">Parallel Heuristic Graph Matching Algorithm for Task Assignment Problem in Distributed Computing Systems (Mentored Research Project)</p><p class="publicationContentDescr"><span style="font-style:italic">Summary:</span> Parallelizable modules of the well-known Heuristic graph matching algorithm, A-star, were discovered to optimize the Task Assignment problem. Experimental setup, using Message Passing Interface, produced near-optimal task assignments (>90%) in all representative test cases obtained at roughly one-third effort of the sequential task assignment algorithm.<br/><span style="font-style:italic">Conference:</span> IEEE - International Conference on Computer & Information Science, 2012<br/><span style="font-style:italic">Authors:</span> Mohan, R.; Gopalan, N.P. ; Prasanth, S.H.D. ; Sanyam, S.; Varma, S.R.</p></div></div>
-<div id="publicationBox2" class="publicationBox"><div id="publicationImage2" class="publicationImage"></div><div id="publicationContent2" class="publicationContent"><p class="publicationContentTitle">A Backtracking Approach for Semantic Matchmaking Algorithm in Web Service Discovery</p><p class="publicationContentDescr"><span style="font-style:italic">Summary:</span> Proposed a novel backtracking approach for match making algorithm used in service discovery that proved to execute in a much better running time (order N) at the cost of precision rate. A detailed study of factors and parameters involved in the algorithm was conducted to discover suitable environments that can make best use of the algorithm.<br/><span style="font-style:italic">Conference:</span> IEEE - International Conference on Circuits, Power and Computing Technologies, 2013<br/><span style="font-style:italic">Author:</span> Prasanth, S.H.D.</p></div></div>
-<div id="publicationBox3" class="publicationBox"><div id="publicationImage3" class="publicationImage"></div><div id="publicationContent3" class="publicationContent"><p class="publicationContentTitle">Diffused RED: Improving RED using Error Diffusion<br/>(Undergraduate Thesis)</p><p class="publicationContentDescr"><span style="font-style:italic">Summary:</span> Improved Random Early Detection using Error Diffusion technique while computing dropping probability of packets during network congestion. Diffused RED algorithm was experimented using Network Simulator which resulted in a reduced variance of Average queue size and a better trade-off for ‘Utilization vs Mean queuing delay’ than actual RED algorithm.<br/><span style="font-style:italic">Paper:</span> Under conference review. Personal mail me for the copy if required.<br/><span style="font-style:italic">Authors:</span> Mala, C.; Prasanth, S.H.D.; Sastivel, L.; Vignesh, B.</p></div></div>
-</div>
-</div>
-
-<div id="artPageContainer">
-<div id="artCanvasContainer">
-<div name="arts" id="arts"></div>
-<div id="artCanvasInnerContainer">
-
-<div id="artGirlPainting" class="linkIframeClass"></div>
-<div id="artMountainPainting" class="linkIframeClass"></div>
-<div id="artTreePainting" class="linkIframeClass"></div>
-<div id="artRightShelfContainer"><div id="artScenary" class="linkIframeClass"></div><div id="artBuddha" class="linkIframeClass"></div></div>
-<div id="artLeftShelfContainer"><div id="artGirlMirror" class="linkIframeClass"></div></div>
-<div id="artObama" class="linkIframeClass"></div>
-<div id="artVaishavi" class="linkIframeClass"></div>
-<div id="artJoker" class="linkIframeClass"></div>
-<div id="artHoney" class="linkIframeClass"></div>
-<div id="artGuitar" class="linkIframeClass"></div>
-<div id="artLeo" class="linkIframeClass"></div>
-<div id="artBoardContainer"><div id="artLondon" class="linkIframeClass"></div><div id="artMarlin" class="linkIframeClass"></div></div>
-
-</div>
-</div>
-</div>
-
-<div id="dpFooter"></div>
+	<!--div id="dpFooter"></div-->
 </body>
 </html>
